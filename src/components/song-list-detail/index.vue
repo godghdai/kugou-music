@@ -1,33 +1,33 @@
 <template>
-   <div class="">
-    <mhead></mhead>
-    <div v-if="detail&&detail.title" class="menu"><div class="back" @click="goback"></div>{{detail.title}}</div>
-    <div v-if="detail&&detail.title" class="main_con">
-    <scroll v-if="detail&&detail.songs" ref="scroll" class="wrapper"
-          :data="detail.songs"
-          :pulldown="pulldown" >
-    <div class="content">
-    <div class="banner">
-      <img :src="detail.img" alt=""/>
-    </div>
-    <div class="banner_info">
-    {{detail.detail}}
-    </div>
-    <ul v-if="detail&&detail.songs">
-      <li v-for="song in detail.songs" class="song_con">
-       <div class="song">
-         <div class="title">
-           {{song.title}}
-         </div>
-         <div class="ico_arrow"></div>
-       </div>
-      </li>
-    </ul></div>
+<div class="">
+  <mhead></mhead>
+  <div v-if="detail&&detail.title" class="menu">
+    <div class="back" @click="goback"></div>{{detail.title}}</div>
+  <div v-if="detail&&detail.title" class="main_con">
+    <scroll v-if="detail&&detail.songs" ref="scroll" class="wrapper" :data="detail.songs" :pulldown="pulldown">
+      <div class="content">
+        <div class="banner">
+          <img :src="detail.img" alt="" />
+        </div>
+        <div class="banner_info" :class="{banner_info_open:isOpen}" @click="toggle">
+          {{detail.detail}}
+          <span :class="['ico',isOpen ? 'ico_open' : 'ico_close']"></span>
+        </div>
+        <ul v-if="detail&&detail.songs" class="songs_con">
+          <li v-for="song in detail.songs" class="song_con">
+            <div class="song">
+              <div class="title">
+                {{song.title}}
+              </div>
+              <div class="ico_arrow"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </scroll>
+  </div>
+</div>
 
-  </scroll>
- </div>
-
-   </div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -40,15 +40,16 @@ export default {
   data () {
     return {
       pulldown: false,
-      detail: null
+      detail: null,
+      isOpen: false
     };
   },
-   watch: {
+  watch: {
     detail () {
       this.refresh();
     }
-   },
-   beforeRouteEnter(to, from, next) {
+  },
+  beforeRouteEnter(to, from, next) {
     getPlayListDetailJson(to.params.url).then(res => {
       if (res.errno === ERR_OK) {
         next(vm => {
@@ -65,6 +66,12 @@ export default {
   methods: {
      refresh() {
        this.$refs.scroll && this.$refs.scroll.refresh();
+     },
+     toggle() {
+      this.isOpen = !this.isOpen;
+      this.$nextTick(() => {
+         this.refresh();
+      });
      },
      goback() {
       this.$router.go(-1);
@@ -101,13 +108,13 @@ export default {
     background-size: 30pxx 52pxx
 
 .main_con
- position:absolute
- left:0
- top:116pxx
- bottom:0
- right:0
- overflow:hidden
- z-index:8
+  position:absolute
+  left:0
+  top:116pxx
+  bottom:0
+  right:0
+  overflow:hidden
+  z-index:8
 
  .wrapper
    height:100%
@@ -118,10 +125,11 @@ export default {
   width:100%
   position:relative
   img
-   width:100%
-   margin-top: -160pxx;
+    width:100%
+    margin-top: -160pxx;
 
 .banner_info
+  position:relative
   padding-top:22pxx
   padding-left:32pxx
   padding-right:106pxx
@@ -130,9 +138,26 @@ export default {
   font-size:$font-size-medium
   line-height:60pxx
   overflow:hidden
+  .ico
+    position:absolute
+    display:block
+    top:20pxx
+    right:20pxx
+    width:42pxx
+    height:42pxx
+    background-size: 42pxx 42pxx
+  .ico_open
+   background: url(./open_icon.png) no-repeat
+  .ico_close
+   background: url(./close_icon.png) no-repeat
+
+.banner_info_open
+  height:auto;
 
 .song_con
   padding-left:26pxx
+  &:last-child .song
+    border-bottom:none
 
 .song
   display:flex

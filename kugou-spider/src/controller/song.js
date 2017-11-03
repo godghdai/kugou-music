@@ -1,4 +1,5 @@
 const Base = require('./base.js');
+const fetch = require('node-fetch');
 
 module.exports = class extends Base {
 
@@ -141,7 +142,8 @@ module.exports = class extends Base {
   }
 
   async singerListAction() {
-    var result = await this.getHtml("http://m.kugou.com/singer/list/88", function($) {
+    let url = this.get("url") || "http://m.kugou.com/singer/list/88";
+    var result = await this.getHtml(url, function($) {
       let data = {
         "title": $(".page-title").text().trim(),
         "singers": []
@@ -184,6 +186,29 @@ module.exports = class extends Base {
     return this.success(result);
   }
 
+  async searchAction() {
+    let url=`http://mobilecdn.kugou.com/api/v3/search/song?format=json&keyword=${encodeURIComponent(this.get("keyword"))}&page=1&pagesize=30&showtype=1`;
+    console.log(url)
+    var result = await fetch(url, {
+        headers: {
+            "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1"
+        }
+    }).then(function(res) {
+        return res.text();
+    });
+    return this.json(result);
+  }
+
+  async hotKeyWordAction() {
+    var result = await fetch("http://mobilecdn.kugou.com/api/v3/search/hot?format=json&plat=0&count=30", {
+        headers: {
+            "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1"
+        }
+    }).then(function(res) {
+        return res.text();
+    });
+    return this.json(result);
+  }
 
 
 };

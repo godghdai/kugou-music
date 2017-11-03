@@ -1,20 +1,17 @@
 <template>
-  <scroll ref="scroll" class="wrapper"
-          :data="categorylist"
-          :pulldown="pulldown"
-          @pulldown="loadData">
-    <ul class="content">
-      <li class="group_con" v-for="group in categorylist">
-        <ul class="group">
-          <li v-for="category in group" class="category" @click="goSingerList(category.id)">
-           <span class="title">{{category.title}}</span>
-           <div class="ico_arrow"></div>
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <div class="loading-wrapper"></div>
-  </scroll>
+<scroll ref="scroll" class="wrapper" :data="categorylist" :pulldown="pulldown" @pulldown="loadData">
+  <ul class="content">
+    <li class="group_con" v-for="group in categorylist">
+      <ul class="group">
+        <li v-for="category in group" class="category" @click="goSingerList(category.id)">
+          <span class="title">{{category.title}}</span>
+          <div class="ico_arrow"></div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <div class="loading-wrapper"></div>
+</scroll>
 </template>
 
 <script type="text/ecmascript-6">
@@ -32,11 +29,11 @@ export default {
   created() {
     this._getJson();
   },
-   activated() {
+  activated() {
       setTimeout(() => {
         this.$refs.scroll && this.$refs.scroll.refresh();
-      }, 20);
-    },
+     }, 20);
+  },
   methods: {
     goSingerList: function(url) {
       this.$router.push({ name: "singerList", params: { url } });
@@ -65,16 +62,17 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
 @import '~common/stylus/variable';
 .wrapper
- height:100%
+  height:100%
 
 .content
- padding:28pxx 26pxx
- box-sizing: border-box
+  padding:28pxx 26pxx
+  box-sizing: border-box
  .group_con
-  background:#fbfbfb
-  border:2px solid #e4e4e4
-  border-radius:8pxx
-  margin-bottom:40pxx
+   background:#fbfbfb
+   border:2px solid #e4e4e4
+   border-radius:8pxx
+   margin-bottom:40pxx
+
 .category
   height:100pxx
   line-height:100pxx
@@ -85,13 +83,13 @@ export default {
   box-sizing: border-box
   display:flex
   .title
-   flex:1
+    flex:1
   &:last-child
-   border-bottom:none
+    border-bottom:none
   .ico_arrow
-   width:20pxx
-   background: url(./arrow_icon.png) no-repeat 0 32pxx;
-   background-size: 20pxx 36pxx;
+    width:20pxx
+    background: url(./arrow_icon.png) no-repeat 0 32pxx;
+    background-size: 20pxx 36pxx;
 
 
 </style>

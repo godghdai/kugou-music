@@ -1,33 +1,34 @@
 <template>
-  <div class="">
-    <mhead></mhead>
-    <div v-if="detail&&detail.title" class="menu"><div class="back" @click="goback"></div>{{detail.title}}</div>
-    <div v-if="detail&&detail.title" class="main_con">
-    <scroll ref="scroll" class="wrapper"
-          :data="detail.songs"
-          :pulldown="pulldown" >
-    <div class="content">
-    <div class="banner">
-      <img :src="detail.img" alt=""/>
-      <div class="mask">
-        {{detail.time}}
+<div class="">
+  <mhead></mhead>
+  <div v-if="detail&&detail.title" class="menu">
+    <div class="back" @click="goback"></div>{{detail.title}}
+  </div>
+  <div v-if="detail&&detail.title" class="main_con">
+    <scroll ref="scroll" class="wrapper" :data="detail.songs" :pulldown="pulldown">
+      <div class="content">
+        <div class="banner">
+          <img :src="detail.img" alt="" />
+          <div class="mask">
+            {{detail.time}}
+          </div>
+        </div>
+        <ul v-if="detail&&detail.songs">
+          <li v-for="song in detail.songs" class="song_con">
+            <div class="song">
+              <div class="ico_number">{{song.num}}</div>
+              <div class="title">
+                {{song.title}}
+              </div>
+              <div class="ico_arrow"></div>
+            </div>
+          </li>
+        </ul>
       </div>
-    </div>
-    <ul v-if="detail&&detail.songs">
-      <li v-for="song in detail.songs" class="song_con">
-       <div class="song">
-         <div class="ico_number">{{song.num}}</div>
-         <div class="title">
-           {{song.title}}
-         </div>
-         <div class="ico_arrow"></div>
-       </div>
-      </li>
-    </ul></div>
+    </scroll>
+  </div>
+</div>
 
-  </scroll>
-  </div>
-  </div>
   </template>
 
 <script type="text/ecmascript-6">

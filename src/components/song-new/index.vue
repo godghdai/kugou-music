@@ -1,23 +1,25 @@
 <template>
- <scroll ref="scroll" class="wrapper" :data="songs" :pulldown="pulldown" @pulldown="loadData">
+<scroll ref="scroll" class="wrapper" :data="songs" :pulldown="pulldown" @pulldown="loadData">
 
- <div class="content" >
- <slider v-if="banners.length" ref="slider" class="banners">
-    <div v-for="banner in banners">
-      <a href="javascript:;">
-        <img :src="banner.img" alt="" />
-      </a>
-    </div>
-  </slider>
-
-      <ul >
-        <li v-for="song in songs" class="song_con" @click="itemclick(12)">
-          <div class="song"><span class="title">{{song.title}}</span></div>
-        </li>
-      </ul>
-
+  <div class="content">
+    <slider v-if="banners.length" ref="slider" class="banners">
+      <div v-for="banner in banners">
+        <a href="javascript:;">
+          <img :src="banner.img" alt="" />
+        </a>
       </div>
-    </scroll>
+    </slider>
+
+    <ul>
+      <li v-for="song in songs" class="song_con" @click="itemclick(12)">
+        <div class="song">
+          <span class="title">{{song.title}}</span>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</scroll>
 
 </template>
 
@@ -97,6 +99,8 @@ export default {
    height: 148pxx
    width:100%
    display: table
+   &:last-child .song
+     border-bottom:none
    .song
     display: table-cell
     vertical-align: middle

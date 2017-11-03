@@ -1,25 +1,23 @@
 <template>
 <div>
   <mhead></mhead>
-  <div class="menu"><div class="back" @click="goback"></div>{{title}}</div>
-  <div class="main_con">
-  <scroll ref="scroll" class="wrapper"
-          :data="singerList"
-          :pulldown="pulldown"
-          >
-    <ul class="content">
-      <li v-for="singer in singers" class="singer_con" @click="goDetail(singer.id)">
-       <div class="singer">
-         <img class="photo" :src="singer.img" alt=""/>
-         <div class="title">{{singer.title}}</div>
-       </div>
-      </li>
-    </ul>
-    <div class="loading-wrapper"></div>
-  </scroll></div>
-
+  <div class="menu">
+    <div class="back" @click="goback"></div>{{title}}
+  </div>
+  <div v-if="singers.length" class="main_con" >
+    <scroll ref="scroll" class="wrapper" :data="singers" :pulldown="pulldown">
+      <ul class="content">
+        <li v-for="singer in singers" class="singer_con" @click="goDetail(singer.url)">
+          <div class="singer">
+            <img class="photo" v-lazy="singer.img" :_src="singer.img" alt="" />
+            <div class="title">{{singer.title}}</div>
+          </div>
+        </li>
+      </ul>
+      <div class="loading-wrapper"></div>
+    </scroll>
+  </div>
 </div>
-
 </template>
 
 <script type="text/ecmascript-6">
@@ -27,7 +25,7 @@ import Mhead from "base/head";
 import Scroll from "base/scroll";
 import { geSingerListJson, ERR_OK } from "api";
 export default {
-  name: "top",
+  name: "singer-list",
   data() {
     return {
       pulldown: false,
@@ -37,30 +35,30 @@ export default {
   },
   watch: {},
   created() {
-    this._getJson();
+
   },
-   activated() {
+  beforeRouteEnter(to, from, next) {
+    geSingerListJson(to.params.url).then(res => {
+      if (res.errno === ERR_OK) {
+        next(vm => {
+          vm.singers = res.data.singers;
+          vm.title = res.data.title;
+        });
+      }
+    });
+  },
+  activated() {
       setTimeout(() => {
         this.$refs.scroll && this.$refs.scroll.refresh();
       }, 20);
-    },
+  },
   methods: {
     goDetail: function(url) {
       console.log(url);
-      this.$router.push({ name: "songListDetail", params: { url } });
+      this.$router.push({ name: "singerDetail", params: { url } });
     },
      goback() {
       this.$router.go(-1);
-    },
-    _getJson() {
-      geSingerListJson().then(res => {
-        if (res.errno === ERR_OK) {
-          this.singers = res.data.singers;
-          this.title = res.data.title;
-          this.$nextTick(() => {
-          });
-        }
-      });
     }
   },
   components: {

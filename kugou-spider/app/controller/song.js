@@ -1,6 +1,7 @@
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 const Base = require('./base.js');
+const fetch = require('node-fetch');
 
 module.exports = class extends Base {
 
@@ -170,7 +171,8 @@ module.exports = class extends Base {
     var _this7 = this;
 
     return _asyncToGenerator(function* () {
-      var result = yield _this7.getHtml("http://m.kugou.com/singer/list/88", function ($) {
+      let url = _this7.get("url") || "http://m.kugou.com/singer/list/88";
+      var result = yield _this7.getHtml(url, function ($) {
         let data = {
           "title": $(".page-title").text().trim(),
           "singers": []
@@ -213,6 +215,38 @@ module.exports = class extends Base {
         return data;
       });
       return _this8.success(result);
+    })();
+  }
+
+  searchAction() {
+    var _this9 = this;
+
+    return _asyncToGenerator(function* () {
+      let url = `http://mobilecdn.kugou.com/api/v3/search/song?format=json&keyword=${encodeURIComponent(_this9.get("keyword"))}&page=1&pagesize=30&showtype=1`;
+      console.log(url);
+      var result = yield fetch(url, {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1"
+        }
+      }).then(function (res) {
+        return res.text();
+      });
+      return _this9.json(result);
+    })();
+  }
+
+  hotKeyWordAction() {
+    var _this10 = this;
+
+    return _asyncToGenerator(function* () {
+      var result = yield fetch("http://mobilecdn.kugou.com/api/v3/search/hot?format=json&plat=0&count=30", {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1"
+        }
+      }).then(function (res) {
+        return res.text();
+      });
+      return _this10.json(result);
     })();
   }
 

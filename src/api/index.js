@@ -63,3 +63,20 @@ export function geSingerListJson(url) {
         return Promise.resolve(res.data);
     });
 }
+
+export function getHotKeyWordJson(keyword) {
+    const baseurl = config.baseURL + 'song/hotKeyWord';
+    return axios.get(baseurl, {
+        params: {keyword}
+    }).then((res) => {
+        return Promise.resolve(res.data);
+    });
+}
+export function getSeachJson(keyword) {
+    const baseurl = config.baseURL + 'song/search';
+    return axios.get(baseurl, {
+        params: {keyword}
+    }).then((res) => {
+        return Promise.resolve(res.data);
+    });
+}

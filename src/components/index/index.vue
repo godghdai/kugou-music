@@ -1,18 +1,26 @@
 <template>
-   <div>
-      <mhead></mhead>
-      <ul class="tab">
-       <li class="tab-item"><router-link to="songNew">新歌</router-link></li>
-       <li class="tab-item"><router-link to="songTop">排行</router-link></li>
-       <li class="tab-item"><router-link to="songList">歌单</router-link></li>
-       <li class="tab-item"><router-link to="singerCategory">歌手</router-link></li>
-     </ul>
-       <div class="tab_content">
-        <keep-alive>
-           <router-view ></router-view>
-        </keep-alive>
-       </div>
-   </div>
+<div>
+  <mhead></mhead>
+  <ul class="tab">
+    <li class="tab-item">
+      <router-link to="songNew">新歌</router-link>
+    </li>
+    <li class="tab-item">
+      <router-link to="songTop">排行</router-link>
+    </li>
+    <li class="tab-item">
+      <router-link to="songList">歌单</router-link>
+    </li>
+    <li class="tab-item">
+      <router-link to="singerCategory">歌手</router-link>
+    </li>
+  </ul>
+  <div class="tab_content">
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+  </div>
+</div>
 
 </template>
 
@@ -68,17 +76,17 @@ export default {
          border-bottom: 8pxx solid #33a3f5;
 
   .tab_content
-   position:absolute
-   left:0
-   top:242pxx
-   bottom:0
-   right:0
-   overflow:hidden
+    position:absolute
+    left:0
+    top:242pxx
+    bottom:0
+    right:0
+    overflow:hidden
 
   .slide-left-enter, .slide-right-leave-active
-   opacity: 0
-   transform: translate(400px, 0)
+    opacity: 0
+    transform: translate(400px, 0)
   .slide-left-leave-active, .slide-right-enter
-   opacity: 0
-   transform: translate(-400px, 0)
+    opacity: 0
+    transform: translate(-400px, 0)
 </style>
