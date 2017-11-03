@@ -6,7 +6,7 @@
     <ul class="content">
       <li class="group_con" v-for="group in categorylist">
         <ul class="group">
-          <li v-for="category in group" class="category">
+          <li v-for="category in group" class="category" @click="goSingerList(category.id)">
            <span class="title">{{category.title}}</span>
            <div class="ico_arrow"></div>
           </li>
@@ -38,8 +38,8 @@ export default {
       }, 20);
     },
   methods: {
-    itemclick: function(id) {
-      this.$router.push({ name: "songListDetail", params: { id } });
+    goSingerList: function(url) {
+      this.$router.push({ name: "singerList", params: { url } });
     },
     _getJson() {
       getClassJson().then(res => {

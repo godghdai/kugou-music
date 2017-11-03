@@ -41,7 +41,7 @@ export default new Router({
           ]
         },
         {
-          path: '/songListDetail/:id',
+          path: '/songListDetail/:url',
           name: 'songListDetail',
           component: songListDetail
         },
@@ -51,12 +51,12 @@ export default new Router({
           component: songTopDetail
         },
         {
-          path: '/singerDetail/:id',
+          path: '/singerDetail/:url',
           name: 'singerDetail',
           component: singerDetail
         },
          {
-          path: '/singerList/:id',
+          path: '/singerList/:url',
           name: 'singerList',
           component: singerList
         },

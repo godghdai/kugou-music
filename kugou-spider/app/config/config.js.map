@@ -6,11 +6,12 @@
     "names": [
         "module",
         "exports",
+        "port",
         "workers"
     ],
-    "mappings": "AAAA;AACAA,OAAOC,OAAP,GAAiB;AACfC,WAAS;AADM,CAAjB",
+    "mappings": "AAAA;AACAA,OAAOC,OAAP,GAAiB;AACfC,QAAM,IADS;AAEfC,WAAS;AAFM,CAAjB",
     "file": "..\\..\\src\\config\\config.js",
     "sourcesContent": [
-        "// default config\nmodule.exports = {\n  workers: 1\n};\n"
+        "// default config\nmodule.exports = {\n  port: 8360,\n  workers: 1\n};\n"
     ]
 }

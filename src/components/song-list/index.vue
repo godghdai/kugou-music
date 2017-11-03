@@ -4,7 +4,7 @@
           :pulldown="pulldown"
           @pulldown="loadData">
     <ul class="content">
-      <li v-for="play in playlist" class="play_con">
+      <li v-for="play in playlist" class="play_con" @click="goDetail(play.url)">
        <div class="play">
          <img class="photo" :src="play.img" alt=""/>
          <div class="title">
@@ -40,8 +40,9 @@ export default {
       }, 20);
     },
   methods: {
-    itemclick: function(id) {
-      this.$router.push({ name: "songListDetail", params: { id } });
+    goDetail: function(url) {
+      console.log(url);
+      this.$router.push({ name: "songListDetail", params: { url } });
     },
     _getJson() {
       getPlayListJson().then(res => {

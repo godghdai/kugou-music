@@ -1,6 +1,6 @@
-# sell
+# kugou-music
 
-> A Vue.js project
+> thinkjs+vue 
 
 ## Build Setup
 

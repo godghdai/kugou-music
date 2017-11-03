@@ -9,7 +9,7 @@
      </ul>
        <div class="tab_content">
         <keep-alive>
-          <router-view ></router-view>
+           <router-view ></router-view>
         </keep-alive>
        </div>
    </div>
@@ -21,8 +21,20 @@ import Mhead from "base/head";
 
 export default {
   name: 'index',
+  data () {
+    return {
+      transitionName: 'slide-left'
+    };
+  },
   components: {
     Mhead
+  },
+  watch: {
+     '$route' (to, from) {
+        const toDepth = to.path.split('/').length;
+        const fromDepth = from.path.split('/').length;
+        this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
+     }
   }
 };
 </script>
@@ -37,10 +49,11 @@ export default {
     width:100%
     padding:0 5px
     box-sizing: border-box
-    height:118pxx
+    height:128pxx
     line-height:118pxx
     background: #fff
     box-shadow: 0 10pxx 10pxx 0 #f4f4f4
+    z-index:99
     .tab-item
       flex:1
       text-align:center
@@ -61,4 +74,11 @@ export default {
    bottom:0
    right:0
    overflow:hidden
+
+  .slide-left-enter, .slide-right-leave-active
+   opacity: 0
+   transform: translate(400px, 0)
+  .slide-left-leave-active, .slide-right-enter
+   opacity: 0
+   transform: translate(-400px, 0)
 </style>

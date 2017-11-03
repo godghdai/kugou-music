@@ -19,8 +19,10 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .head
+  position:relative
   height:116pxx
   background:#2ca2f9
+  z-index:100
   .logo
    float:left
    margin-top:24pxx

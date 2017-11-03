@@ -45,3 +45,21 @@ export function getTopDetailJson(url) {
         return Promise.resolve(res.data);
     });
 }
+
+export function getPlayListDetailJson(url) {
+    const baseurl = config.baseURL + 'song/playListDetail';
+    return axios.get(baseurl, {
+        params: {url}
+    }).then((res) => {
+        return Promise.resolve(res.data);
+    });
+}
+
+export function geSingerListJson(url) {
+    const baseurl = config.baseURL + 'song/singerList';
+    return axios.get(baseurl, {
+        params: {url}
+    }).then((res) => {
+        return Promise.resolve(res.data);
+    });
+}

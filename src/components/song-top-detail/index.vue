@@ -5,7 +5,7 @@
     <div v-if="detail&&detail.title" class="main_con">
     <scroll ref="scroll" class="wrapper"
           :data="detail.songs"
-          :pulldown="pulldown">
+          :pulldown="pulldown" >
     <div class="content">
     <div class="banner">
       <img :src="detail.img" alt=""/>
@@ -33,7 +33,6 @@
 <script type="text/ecmascript-6">
 import Scroll from "base/scroll";
 import Mhead from "base/head";
-
 import { getTopDetailJson, ERR_OK } from "api";
 export default {
   name: "top-detail",

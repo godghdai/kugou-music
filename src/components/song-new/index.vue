@@ -1,28 +1,23 @@
 <template>
-<div>
-  <slider v-if="banners.length" ref="slider" class="banners">
+ <scroll ref="scroll" class="wrapper" :data="songs" :pulldown="pulldown" @pulldown="loadData">
+
+ <div class="content" >
+ <slider v-if="banners.length" ref="slider" class="banners">
     <div v-for="banner in banners">
       <a href="javascript:;">
         <img :src="banner.img" alt="" />
       </a>
     </div>
   </slider>
-  <div class="songs_con" >
-    <scroll ref="scroll" class="wrapper" :data="songs" :pulldown="pulldown" @pulldown="loadData">
-      <ul class="content">
+
+      <ul >
         <li v-for="song in songs" class="song_con" @click="itemclick(12)">
           <div class="song"><span class="title">{{song.title}}</span></div>
         </li>
       </ul>
+
+      </div>
     </scroll>
-  </div>
-  <div>
-
-  </div>
-
-</div>
-
-
 
 </template>
 
@@ -34,7 +29,7 @@ export default {
   name: "singer",
   data() {
     return {
-      pulldown: true,
+      pulldown: false,
       banners: [],
       songs: []
     };
@@ -44,12 +39,10 @@ export default {
     this._getJson();
   },
   activated() {
-    setTimeout(() => {
-      this.$refs.slider && this.$refs.slider.refresh();
-    }, 20);
+    this.refresh();
   },
   methods: {
-    itemclick: function(id) {
+    itemclick (id) {
       this.$router.push({
         name: "songListDetail",
         params: {
@@ -57,11 +50,15 @@ export default {
         }
       });
     },
+    refresh () {
+      this.$refs.slider && this.$refs.slider.refresh();
+    },
     _getJson() {
       getIndexJson().then(res => {
         if (res.errno === ERR_OK) {
           this.banners = res.data.banners;
           this.songs = res.data.songs;
+          this.refresh();
         }
       });
     },
@@ -82,22 +79,19 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
 @import '~common/stylus/variable';
-
-.banners
- height: 308pxx
- img,a
-  height: 308pxx
-  width: 100%
-
-.songs_con
- position: absolute;
- left: 0;
- top: 308pxx
- bottom: 0
- overflow: hidden
  .wrapper
   height: 100%
-  .song_con
+
+ .banners
+  height: 308pxx
+  img,a
+   height: 308pxx
+   width: 100%
+
+ .content
+  padding-top:10pxx
+
+ .song_con
    padding-left:24pxx
    font-size: $font-size-medium
    height: 148pxx
