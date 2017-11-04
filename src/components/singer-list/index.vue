@@ -121,5 +121,5 @@ export default {
       font-size:$font-size-medium
 
 .content :last-child .singer
- border-bottom:none
+  border-bottom:none
 </style>

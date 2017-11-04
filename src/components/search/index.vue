@@ -1,5 +1,5 @@
 <template>
-<div>
+  <div>
   <mhead></mhead>
   <div class="menu">
   <div class="back" @click="goback"></div>搜索</div>
@@ -28,14 +28,14 @@
   <div v-if="songs.length&&showResult" class="resultPanel" >
     <scroll ref="scroll_songs" class="wrapper" :data="songs" :pulldown="pulldown2">
      <ul class="content">
-        <li v-for="song in songs" class="song_con">
+        <li v-for="song in songs" class="song_con" @click="addSongToPlayList(song)">
             <div class="title">{{song.filename}}</div>
             <div class="ico_play"></div>
         </li>
       </ul>
     </scroll>
   </div>
-</div>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -73,6 +73,12 @@ export default {
       }, 20);
   },
   methods: {
+    addSongToPlayList(song) {
+      this.$store.dispatch('addSongToPlayList', {
+        id: song.hash,
+        title: song.filename
+      });
+    },
     initHotKeyWord() {
        getHotKeyWordJson().then(res => {
           if (res.status === 1) {

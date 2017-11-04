@@ -14,7 +14,7 @@
           <span :class="['ico',isOpen ? 'ico_open' : 'ico_close']"></span>
         </div>
         <ul v-if="detail&&detail.songs" class="songs_con">
-          <li v-for="song in detail.songs" class="song_con">
+          <li v-for="song in detail.songs" class="song_con" @click="addSongToPlayList(song)">
             <div class="song">
               <div class="title">
                 {{song.title}}
@@ -31,6 +31,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { mapActions } from 'vuex';
 import Scroll from "base/scroll";
 import Mhead from "base/head";
 import { getPlayListDetailJson, ERR_OK } from "api";
@@ -64,6 +65,9 @@ export default {
     }, 20);
   },
   methods: {
+    ...mapActions([
+     'addSongToPlayList'
+     ]),
      refresh() {
        this.$refs.scroll && this.$refs.scroll.refresh();
      },

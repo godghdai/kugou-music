@@ -1,5 +1,5 @@
 <template>
-<div>
+<div >
   <mhead></mhead>
   <ul class="tab">
     <li class="tab-item">
@@ -16,9 +16,7 @@
     </li>
   </ul>
   <div class="tab_content">
-    <keep-alive>
       <router-view></router-view>
-    </keep-alive>
   </div>
 </div>
 
@@ -31,7 +29,7 @@ export default {
   name: 'index',
   data () {
     return {
-      transitionName: 'slide-left'
+
     };
   },
   components: {
@@ -39,16 +37,15 @@ export default {
   },
   watch: {
      '$route' (to, from) {
-        const toDepth = to.path.split('/').length;
-        const fromDepth = from.path.split('/').length;
-        this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
+       // const toDepth = to.path.split('/').length;
+        // const fromDepth = from.path.split('/').length;
+        // this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
      }
   }
 };
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-
  .tab
     position:absolute
     top:116pxx
@@ -83,10 +80,5 @@ export default {
     right:0
     overflow:hidden
 
-  .slide-left-enter, .slide-right-leave-active
-    opacity: 0
-    transform: translate(400px, 0)
-  .slide-left-leave-active, .slide-right-enter
-    opacity: 0
-    transform: translate(-400px, 0)
+
 </style>

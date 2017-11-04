@@ -72,10 +72,22 @@ export function getHotKeyWordJson(keyword) {
         return Promise.resolve(res.data);
     });
 }
+
 export function getSeachJson(keyword) {
     const baseurl = config.baseURL + 'song/search';
     return axios.get(baseurl, {
         params: {keyword}
+    }).then((res) => {
+        return Promise.resolve(res.data);
+    });
+}
+
+export function getSongInfoJson(song) {
+    let hash = song.id.replace("songs_", "");
+    console.log(hash);
+    const baseurl = config.baseURL + 'song/songInfo';
+    return axios.get(baseurl, {
+        params: {hash}
     }).then((res) => {
         return Promise.resolve(res.data);
     });

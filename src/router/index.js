@@ -16,53 +16,54 @@ import search from 'components/search';
 Vue.use(Router);
 
 export default new Router({
-      linkActiveClass: 'active',
-      routes: [
-        { path: '/', redirect: '/index/songNew' },
-        {
-          path: '/index',
-          component: index,
-          children: [{
-              path: 'songNew',
-              component: songNew
-            },
-            {
-              path: 'songTop',
-              component: songTop
-            },
-            {
-              path: 'songList',
-              component: songList
-            },
-            {
-              path: 'singerCategory',
-              component: singerCategory
-            }
-          ]
+  linkActiveClass: 'active',
+  routes: [
+    { path: '/', redirect: '/index/songNew' },
+    {
+      path: '/index',
+      component: index,
+      children: [{
+          path: 'songNew',
+          component: songNew
         },
         {
-          path: '/songListDetail/:url',
-          name: 'songListDetail',
-          component: songListDetail
+          path: 'songTop',
+          component: songTop
         },
         {
-          path: '/songTopDetail/:url',
-          name: 'songTopDetail',
-          component: songTopDetail
+          path: 'songList',
+          component: songList
         },
         {
-          path: '/singerDetail/:url',
-          name: 'singerDetail',
-          component: singerDetail
-        },
-         {
-          path: '/singerList/:url',
-          name: 'singerList',
-          component: singerList
-        },
-         {
-          path: '/search',
-          name: 'search',
-          component: search
-        }]
-      });
+          path: 'singerCategory',
+          component: singerCategory
+        }
+      ]
+    },
+    {
+      path: '/songListDetail/:url',
+      name: 'songListDetail',
+      component: songListDetail
+    },
+    {
+      path: '/songTopDetail/:url',
+      name: 'songTopDetail',
+      component: songTopDetail
+    },
+    {
+      path: '/singerDetail/:url',
+      name: 'singerDetail',
+      component: singerDetail
+    },
+    {
+      path: '/singerList/:url',
+      name: 'singerList',
+      component: singerList
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: search
+    }
+  ]
+});

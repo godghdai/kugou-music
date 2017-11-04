@@ -3,27 +3,26 @@
 
   <div class="content">
     <slider v-if="banners.length" ref="slider" class="banners">
-      <div v-for="banner in banners">
+      <div v-for="banner in banners" class="banners_wrap">
         <a href="javascript:;">
           <img :src="banner.img" alt="" />
         </a>
       </div>
     </slider>
-
     <ul>
-      <li v-for="song in songs" class="song_con" @click="itemclick(12)">
+      <li v-for="song in songs" class="song_con" @click="addSongToPlayList(song)">
         <div class="song">
           <span class="title">{{song.title}}</span>
         </div>
       </li>
     </ul>
-
   </div>
 </scroll>
 
 </template>
 
 <script type="text/ecmascript-6">
+import { mapActions } from 'vuex';
 import Scroll from "base/scroll";
 import { getIndexJson, ERR_OK } from "api";
 import Slider from "base/slider";
@@ -44,14 +43,9 @@ export default {
     this.refresh();
   },
   methods: {
-    itemclick (id) {
-      this.$router.push({
-        name: "songListDetail",
-        params: {
-          id
-        }
-      });
-    },
+    ...mapActions([
+     'addSongToPlayList'
+    ]),
     refresh () {
       this.$refs.slider && this.$refs.slider.refresh();
     },
@@ -82,13 +76,18 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
 @import '~common/stylus/variable';
  .wrapper
-  height: 100%
+   height: 100%
 
  .banners
-  height: 308pxx
-  img,a
    height: 308pxx
-   width: 100%
+   width: 754pxx
+   .banners_wrap
+     width:800%
+   img,a
+     height: 308pxx
+     width: 754pxx
+    a
+      float:left
 
  .content
   padding-top:10pxx

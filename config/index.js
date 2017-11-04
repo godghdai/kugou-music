@@ -31,13 +31,6 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      "/api2": {
-        target: 'http://www.higotube.com/index.php?g=api',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api2': ''
-        }
-      },
       "/api": {
         target: 'http://127.0.0.1:8360',
         changeOrigin: true,

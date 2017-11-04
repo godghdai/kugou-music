@@ -210,5 +210,17 @@ module.exports = class extends Base {
     return this.json(result);
   }
 
+  async songInfoAction() {
+    let hash=this.get("hash");
+    var result = await fetch(`http://m.kugou.com/app/i/getSongInfo.php?cmd=playInfo&hash=${hash}&from=mkugou`, {
+        headers: {
+            "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1"
+        }
+    }).then(function(res) {
+        return res.text();
+    });
+    return this.json(result);
+  }
+
 
 };

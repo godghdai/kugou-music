@@ -14,7 +14,7 @@
           </div>
         </div>
         <ul v-if="detail&&detail.songs">
-          <li v-for="song in detail.songs" class="song_con">
+          <li v-for="song in detail.songs" class="song_con" @click="addSongToPlayList(song)">
             <div class="song">
               <div class="ico_number">{{song.num}}</div>
               <div class="title">
@@ -32,6 +32,7 @@
   </template>
 
 <script type="text/ecmascript-6">
+import { mapActions } from 'vuex';
 import Scroll from "base/scroll";
 import Mhead from "base/head";
 import { getTopDetailJson, ERR_OK } from "api";
@@ -60,9 +61,9 @@ export default {
     }, 20);
   },
   methods: {
-    itemclick: function(id) {
-      this.$router.push({ name: "songListDetail", params: { id } });
-    },
+    ...mapActions([
+     'addSongToPlayList'
+    ]),
     goback() {
       this.$router.go(-1);
     }
