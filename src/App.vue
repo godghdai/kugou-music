@@ -1,5 +1,5 @@
 <template>
-   <div>
+   <div class="app">
       <router-view></router-view>
       <ul class="playlist">
         <li v-for="singer in playlist">
@@ -42,9 +42,9 @@ export default {
 };
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
- #app
+ .app
    height:100%
-   width:100%
+   margin:auto 0
 /*
 .slide-left-enter-active,.slide-right-enter-active
   transition: all .2s ease

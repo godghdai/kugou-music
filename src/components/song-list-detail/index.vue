@@ -31,14 +31,14 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 import Scroll from "base/scroll";
 import Mhead from "base/head";
 import { getPlayListDetailJson, ERR_OK } from "api";
 
 export default {
-  name: 'singer',
-  data () {
+  name: "singer",
+  data() {
     return {
       pulldown: false,
       detail: null,
@@ -46,7 +46,7 @@ export default {
     };
   },
   watch: {
-    detail () {
+    detail() {
       this.refresh();
     }
   },
@@ -61,23 +61,21 @@ export default {
   },
   activated() {
     setTimeout(() => {
-     this.refresh();
+      this.refresh();
     }, 20);
   },
   methods: {
-    ...mapActions([
-     'addSongToPlayList'
-     ]),
-     refresh() {
-       this.$refs.scroll && this.$refs.scroll.refresh();
-     },
-     toggle() {
+    ...mapActions(["addSongToPlayList"]),
+    refresh() {
+      this.$refs.scroll && this.$refs.scroll.refresh();
+    },
+    toggle() {
       this.isOpen = !this.isOpen;
       this.$nextTick(() => {
-         this.refresh();
+        this.refresh();
       });
-     },
-     goback() {
+    },
+    goback() {
       this.$router.go(-1);
     }
   },
@@ -90,95 +88,118 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
 @import '~common/stylus/variable';
-.menu
-  position:absolute
-  left:0
-  top:116pxx
-  height:100pxx
-  background: linear-gradient(top,rgba(0,0,0,.6),transparent)
-  text-align: center
-  z-index:9
-  width:100%
-  line-height:100pxx
-  font-size:$font-size-medium
-  color:#fff
-  .back
-    position:absolute
-    left:0
-    top:0
-    width:120pxx
-    height:100%
-    background: url(./goback_1.png) no-repeat 26pxx 26pxx
-    background-size: 30pxx 52pxx
 
-.main_con
-  position:absolute
-  left:0
-  top:116pxx
-  bottom:0
-  right:0
-  overflow:hidden
-  z-index:8
+.menu {
+  position: absolute;
+  left: 0;
+  top: 116pxx;
+  height: 100pxx;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.6), transparent);
+  text-align: center;
+  z-index: 9;
+  width: 100%;
+  line-height: 100pxx;
+  font-size: $font-size-medium;
+  color: #fff;
 
- .wrapper
-   height:100%
+  .back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 120pxx;
+    height: 100%;
+    background: url('./goback_1.png') no-repeat 26pxx 26pxx;
+    background-size: 30pxx 52pxx;
+  }
+}
 
-.banner
-  overflow:hidden
-  height:450pxx
-  width:100%
-  position:relative
-  img
-    width:100%
+.main_con {
+  position: absolute;
+  left: 0;
+  top: 116pxx;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 8;
+}
+
+.wrapper {
+  height: 100%;
+}
+
+.banner {
+  overflow: hidden;
+  height: 450pxx;
+  width: 100%;
+  position: relative;
+
+  img {
+    width: 100%;
     margin-top: -160pxx;
+  }
+}
 
-.banner_info
-  position:relative
-  padding-top:22pxx
-  padding-left:32pxx
-  padding-right:106pxx
-  height:58pxx
+.banner_info {
+  position: relative;
+  padding-top: 22pxx;
+  padding-left: 32pxx;
+  padding-right: 106pxx;
+  height: 58pxx;
   box-shadow: 0 8pxx 8pxx 0 #f4f4f4;
-  font-size:$font-size-medium
-  line-height:60pxx
-  overflow:hidden
-  .ico
-    position:absolute
-    display:block
-    top:20pxx
-    right:20pxx
-    width:42pxx
-    height:42pxx
-    background-size: 42pxx 42pxx
-  .ico_open
-   background: url(./open_icon.png) no-repeat
-  .ico_close
-   background: url(./close_icon.png) no-repeat
+  font-size: $font-size-medium;
+  line-height: 60pxx;
+  overflow: hidden;
 
-.banner_info_open
-  height:auto;
+  .ico {
+    position: absolute;
+    display: block;
+    top: 20pxx;
+    right: 20pxx;
+    width: 42pxx;
+    height: 42pxx;
+    background-size: 42pxx 42pxx;
+  }
 
-.song_con
-  padding-left:26pxx
-  &:last-child .song
-    border-bottom:none
+  .ico_open {
+    background: url('./open_icon.png') no-repeat;
+  }
 
-.song
-  display:flex
-  height:144pxx
-  line-height:48pxx
-  align-items: center
-  border-bottom:2px solid #e5e5e5
-  .title
-    flex:1
-    color:#333333
-    font-size:$font-size-medium
-    // text-overflow:ellipsis
-    // white-space:nowrap
-    // overflow:hidden
-  .ico_arrow
-    width:68pxx
+  .ico_close {
+    background: url('./close_icon.png') no-repeat;
+  }
+}
 
+.banner_info_open {
+  height: auto;
+}
 
+.song_con {
+  padding-left: 26pxx;
+
+  &:last-child .song {
+    border-bottom: none;
+  }
+}
+
+.song {
+  display: flex;
+  height: 144pxx;
+  line-height: 48pxx;
+  align-items: center;
+  border-bottom: 2px solid #e5e5e5;
+
+  .title {
+    flex: 1;
+    color: #333333;
+    font-size: $font-size-medium;
+  }
+
+  // text-overflow:ellipsis
+  // white-space:nowrap
+  // overflow:hidden
+  .ico_arrow {
+    width: 68pxx;
+  }
+}
 </style>
 

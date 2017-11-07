@@ -9,6 +9,7 @@ const mutations = {
   },
   [types.SET_PLAYLIST](state, playlist) {
     state.playlist = playlist;
+    // this["_mutations"][types.SET_CURRENT_INDEX][0](0);
   },
   [types.SET_CURRENT_INDEX](state, index) {
     state.currentIndex = index;

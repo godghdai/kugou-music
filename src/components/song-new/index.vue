@@ -22,7 +22,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 import Scroll from "base/scroll";
 import { getIndexJson, ERR_OK } from "api";
 import Slider from "base/slider";
@@ -36,6 +36,9 @@ export default {
     };
   },
   watch: {},
+  mounted() {
+
+  },
   created() {
     this._getJson();
   },
@@ -43,10 +46,8 @@ export default {
     this.refresh();
   },
   methods: {
-    ...mapActions([
-     'addSongToPlayList'
-    ]),
-    refresh () {
+    ...mapActions(["addSongToPlayList"]),
+    refresh() {
       this.$refs.slider && this.$refs.slider.refresh();
     },
     _getJson() {
@@ -75,39 +76,57 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
 @import '~common/stylus/variable';
- .wrapper
-   height: 100%
 
- .banners
-   height: 308pxx
-   width: 754pxx
-   .banners_wrap
-     width:800%
-   img,a
-     height: 308pxx
-     width: 754pxx
-    a
-      float:left
+.wrapper {
+  height: 100%;
+}
 
- .content
-  padding-top:10pxx
+.banners {
+  height: 308pxx;
+  width: 100%;
+  overflow: hidden;
 
- .song_con
-   padding-left:24pxx
-   font-size: $font-size-medium
-   height: 148pxx
-   width:100%
-   display: table
-   &:last-child .song
-     border-bottom:none
-   .song
-    display: table-cell
-    vertical-align: middle
-    border-bottom: 1px solid #e5e5e5
-    padding-right:100pxx
-    .title
-     color:#333
-     line-height:48pxx
-     display: table-cell
-     vertical-align: middle
+  .banners_wrap {
+    width: 100%;
+  }
+
+  img, a {
+    height: 308pxx;
+    width: 100%;
+  }
+
+  a {
+    float: left;
+  }
+}
+
+.content {
+  padding-top: 10pxx;
+}
+
+.song_con {
+  padding-left: 24pxx;
+  font-size: $font-size-medium;
+  height: 148pxx;
+  width: 100%;
+  display: table;
+
+  &:last-child .song {
+    border-bottom: none;
+  }
+
+  .song {
+    display: table-cell;
+    vertical-align: middle;
+    border-bottom: 1px solid #e5e5e5;
+    padding-right: 100pxx;
+
+    .title {
+      color: #333;
+      line-height: 48pxx;
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+}
 </style>

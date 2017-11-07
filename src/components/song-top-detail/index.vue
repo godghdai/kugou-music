@@ -32,7 +32,7 @@
   </template>
 
 <script type="text/ecmascript-6">
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 import Scroll from "base/scroll";
 import Mhead from "base/head";
 import { getTopDetailJson, ERR_OK } from "api";
@@ -61,9 +61,7 @@ export default {
     }, 20);
   },
   methods: {
-    ...mapActions([
-     'addSongToPlayList'
-    ]),
+    ...mapActions(["addSongToPlayList"]),
     goback() {
       this.$router.go(-1);
     }
@@ -78,80 +76,97 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
 @import '~common/stylus/variable';
 
-.wrapper
-  height: 100%
+.wrapper {
+  height: 100%;
+}
 
-.main_con
- position:absolute
- left:0
- top:116pxx
- bottom:0
- right:0
- overflow:hidden
- z-index:8
+.main_con {
+  position: absolute;
+  left: 0;
+  top: 116pxx;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 8;
+}
 
-.menu
-  position:absolute
-  left:0
-  top:116pxx
-  height:100pxx
-  background: linear-gradient(top,rgba(0,0,0,.6),transparent)
-  text-align: center
-  z-index:9
-  width:100%
-  line-height:100pxx
-  color:#fff
-  .back
-    position:absolute
-    left:0
-    top:0
-    width:120pxx
-    height:100%
-    background: url(./goback_1.png) no-repeat 26pxx 26pxx
-    background-size: 30pxx 52pxx
+.menu {
+  position: absolute;
+  left: 0;
+  top: 116pxx;
+  height: 100pxx;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.6), transparent);
+  text-align: center;
+  z-index: 9;
+  width: 100%;
+  line-height: 100pxx;
+  color: #fff;
 
-.banner
-  overflow:hidden
-  height:450pxx
-  width:100%
-  position:relative
-  img
-   width:100%
-   margin-top: -160pxx;
-  .mask
-    position:absolute
-    left:0
-    bottom:0
-    height:100pxx
-    background: linear-gradient(bottom,rgba(0,0,0,.6),transparent)
-    z-index:9
-    width:100%
-    color:#fff;
-    font-size:$font-size-medium
-    line-height:64pxx
-    padding-left:40pxx
+  .back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 120pxx;
+    height: 100%;
+    background: url('./goback_1.png') no-repeat 26pxx 26pxx;
+    background-size: 30pxx 52pxx;
+  }
+}
 
-.song_con
-  padding-left:26pxx
+.banner {
+  overflow: hidden;
+  height: 450pxx;
+  width: 100%;
+  position: relative;
 
-.song
-  display:flex
-  height:144pxx
-  line-height:48pxx
-  align-items: center
-  border-bottom:2px solid #e5e5e5
-  .ico_number
-    width:72pxx
-    color:#999
-    font-size:20pxx
-  .title
-    flex:1
-    color:#333333
-    font-size:$font-size-medium
-    // text-overflow:ellipsis
-    // white-space:nowrap
-    // overflow:hidden
-  .ico_arrow
-    width:68pxx
+  img {
+    width: 100%;
+    margin-top: -160pxx;
+  }
 
+  .mask {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100pxx;
+    background: linear-gradient(bottom, rgba(0, 0, 0, 0.6), transparent);
+    z-index: 9;
+    width: 100%;
+    color: #fff;
+    font-size: $font-size-medium;
+    line-height: 64pxx;
+    padding-left: 40pxx;
+  }
+}
+
+.song_con {
+  padding-left: 26pxx;
+}
+
+.song {
+  display: flex;
+  height: 144pxx;
+  line-height: 48pxx;
+  align-items: center;
+  border-bottom: 2px solid #e5e5e5;
+
+  .ico_number {
+    width: 72pxx;
+    color: #999;
+    font-size: 20pxx;
+  }
+
+  .title {
+    flex: 1;
+    color: #333333;
+    font-size: $font-size-medium;
+  }
+
+  // text-overflow:ellipsis
+  // white-space:nowrap
+  // overflow:hidden
+  .ico_arrow {
+    width: 68pxx;
+  }
+}
 </style>

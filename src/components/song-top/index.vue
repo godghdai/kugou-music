@@ -29,11 +29,11 @@ export default {
   created() {
     this._getJson();
   },
-   activated() {
-      setTimeout(() => {
-        this.$refs.scroll && this.$refs.scroll.refresh();
-      }, 20);
-    },
+  activated() {
+    setTimeout(() => {
+      this.$refs.scroll && this.$refs.scroll.refresh();
+    }, 20);
+  },
   methods: {
     itemclick: function(url) {
       this.$router.push({ name: "songTopDetail", params: { url } });
@@ -42,8 +42,7 @@ export default {
       getTopJson().then(res => {
         if (res.errno === ERR_OK) {
           this.tops = res.data;
-          this.$nextTick(() => {
-          });
+          this.$nextTick(() => {});
         }
       });
     },
@@ -61,34 +60,46 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
 @import '~common/stylus/variable';
-.wrapper
-  height:100%
 
-.top_con
-  overflow:hidden
-  padding-left:24pxx
-  &:last-child .top
-    border-bottom:none
- .top
-   padding-top:26pxx
-   height:248pxx
-   border-bottom:1px solid #e5e5e5
-   box-sizing: border-box
- .photo
-   float:left
-   width:194pxx
-   height:194pxx
- .title
-   margin-left:40pxx
-   float:left
-   height:194pxx
-   line-height:194pxx
-   font-size:$font-size-medium
- .ico_arrow
-   float:right
-   width:80pxx
-   height:100%
-   background: url(./arrow_icon.png) no-repeat 36pxx 80pxx;
-   background-size: 20pxx 36pxx;
+.wrapper {
+  height: 100%;
+}
 
+.top_con {
+  overflow: hidden;
+  padding-left: 24pxx;
+
+  &:last-child .top {
+    border-bottom: none;
+  }
+}
+
+.top {
+  padding-top: 26pxx;
+  height: 248pxx;
+  border-bottom: 1px solid #e5e5e5;
+  box-sizing: border-box;
+}
+
+.photo {
+  float: left;
+  width: 194pxx;
+  height: 194pxx;
+}
+
+.title {
+  margin-left: 40pxx;
+  float: left;
+  height: 194pxx;
+  line-height: 194pxx;
+  font-size: $font-size-medium;
+}
+
+.ico_arrow {
+  float: right;
+  width: 80pxx;
+  height: 100%;
+  background: url('./arrow_icon.png') no-repeat 36pxx 80pxx;
+  background-size: 20pxx 36pxx;
+}
 </style>
