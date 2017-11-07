@@ -26,6 +26,6 @@ export const playPrev = function({ commit, state }) {
 export const playNext = function({ commit, state }) {
   let next = state.currentIndex + 1;
   let playlist = state.playlist;
-  if (next > playlist.length) next = 0;
+  if (next > playlist.length - 1) next = 0;
   commit(types.SET_CURRENT_INDEX, next);
 }
