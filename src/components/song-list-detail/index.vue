@@ -157,15 +157,16 @@ export default {
     right: 20pxx;
     width: 42pxx;
     height: 42pxx;
-    background-size: 42pxx 42pxx;
   }
 
   .ico_open {
     background: url('./open_icon.png') no-repeat;
+    background-size: 100%;
   }
 
   .ico_close {
     background: url('./close_icon.png') no-repeat;
+    background-size: 100%;
   }
 }
 
