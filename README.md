@@ -1,5 +1,5 @@
 # kugou-music
-
+![Alt text](./GIF.gif)
 > thinkjs+vue 
 
 ## Build Setup
